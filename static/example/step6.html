@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../themes/default/easyui.css" rel="stylesheet" />
+    <script src="../jquery-2.1.0.js"></script>
+    <script src="../jquery.easyui.min.js"></script>
+    <script src="step5.js"></script>
+</head>
+<body>
+    <div>
+        <label>省:</label>
+        <input class="easyui-combobox" name="province" category-id="25" id="province">
+
+        <label>市:</label>
+        <input class="easyui-combobox" name="city" category-id="26" parent-category-id="25">
+
+        <label>县:</label>
+        <input class="easyui-combobox" name="location" category-id="27" parent-category-id="26">   
+    </div>
+
+    <div>
+        <button onclick="test_customer_event_handle()">选择湖南省</button>        
+    </div>
+
+    <script>
+        /** Test case **/        
+        function test_customer_event_handle() {
+            $("#province").combobox("setValue", "1");
+        }
+
+        $("#province").combobox({
+            onChange: function (newValue, oldValue) {
+                console.log("test ok,selected value is s%", newValue);
+            }
+        });
+       
+    </script>
+</body>
+</html>

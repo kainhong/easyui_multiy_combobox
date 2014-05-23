@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="jquery-2.1.0.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.16.0/build/cssgrids/cssgrids-min.css">-->
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.16.0/build/cssgrids-responsive/cssgrids-responsive-min.css">
+
+    <link href="./themes/default/easyui.css" rel="stylesheet" />
+    <script src="./jquery.easyui.min.js"></script>
+    <script src="./jquery.form.js"></script>
+    <!--<script src="jquery.combobox.js"></script>-->
+    <script src="category.js"></script>
+
+    <style>
+        body {
+            margin: auto; /* center in viewport */
+            width: 960px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form">
+        <div class='yui3-g-r'>
+            <div class="yui3-u-1-3">
+                <label>省:</label>
+                <input class="easyui-combobox" name="province" category-id="25" id="province">
+            </div>
+            <div class="yui3-u-1-3">
+                <label>市:</label>
+                <input class="easyui-combobox" name="city" category-id="26" parent-category-id="25">
+            </div>
+            <div class="yui3-u-1-3">
+                <label>县:</label>
+                <input class="easyui-combobox" name="location" category-id="27" parent-category-id="26">                
+            </div>
+            <div class="yui3-u-2-3">
+                <label>省:</label>
+                <input class="easyui-combobox" name="province1" id="province1">
+                <input type="text" name="hh" onchange="console.log('bb');" />
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <button onclick="onClick()">选择湖南省</button>
+        <button onclick="javascript:return bindForm()">填充表单</button>
+
+        <script>
+            $("#province1").combobox({
+                valueField: 'id',
+                textField: 'text',
+                method: 'GET' ,
+                url: '/data/category?id=25',
+                onChange: function (newValue, oldValue) {
+                    console.log(newValue);
+                }
+            });
+
+            $("#province").combobox({
+                onChange: function (o, n) {
+                    console.log(o);
+                }
+            });
+            function onClick() {
+                $("#province").combobox("setValue", "1");
+            }
+            function bindForm()
+            {
+                
+                $("#form").form("load", {                    
+                    province: "1",
+                    city:"11",
+                    location:"13"
+                })
+              //  $("#province").val(1);
+                return false;
+            }
+        </script>
+    </div>
+
+
+
+</body>
+</html>
